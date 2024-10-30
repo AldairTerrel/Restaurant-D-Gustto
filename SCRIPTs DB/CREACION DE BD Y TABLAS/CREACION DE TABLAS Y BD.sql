@@ -1,4 +1,4 @@
--- Crear la base de datos 
+-- Crear la base de datos 2.0
 CREATE DATABASE SelfServiceDB;
 GO
 USE SelfServiceDB;
