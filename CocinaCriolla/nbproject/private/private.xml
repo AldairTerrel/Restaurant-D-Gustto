@@ -3,7 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Restaurant%20D'Gustto(Realizado%20en%20Netbeens%20IDE%208.2)/CocinaCriolla/src/CocinaCriolla/ConexionSQL.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/Restaurant-D-Gustto/CocinaCriolla/src/Vista/VistaIngresoAdministrador.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/Restaurant-D-Gustto/CocinaCriolla/src/modelo/Empleado.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/Restaurant-D-Gustto/CocinaCriolla/src/CocinaCriolla/Usuario.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/Restaurant-D-Gustto/CocinaCriolla/src/CocinaCriolla/ConexionSQL.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/Restaurant-D-Gustto/CocinaCriolla/src/dao/EmpleadoDAO.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/Restaurant-D-Gustto/CocinaCriolla/src/Vista/VistaPrincipalReportes.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/Restaurant-D-Gustto/CocinaCriolla/src/Vista/VistaVentasRegistradas.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/Restaurant-D-Gustto/CocinaCriolla/src/Vista/VistaPrincipalAdministrador.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/Restaurant-D-Gustto/CocinaCriolla/src/CocinaCriolla/PedidoJFrame.java</file>
+            <file>file:/C:/Users/USER/Documents/GitHub/Restaurant-D-Gustto/CocinaCriolla/src/dao/VentaDAO.java</file>
         </group>
     </open-files>
 </project-private>
