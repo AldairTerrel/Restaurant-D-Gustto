@@ -20,7 +20,7 @@ public class VistaIngresoAdministrador extends javax.swing.JFrame {
     public VistaIngresoAdministrador() {
         initComponents();
     }
-
+     //Hola mundo
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
