@@ -5,10 +5,6 @@
  */
 package dao;
 
-/**
- *
- * @author USER
- */
 import CocinaCriolla.ConexionSQL;
 import java.sql.Connection;
 import java.sql.ResultSet;

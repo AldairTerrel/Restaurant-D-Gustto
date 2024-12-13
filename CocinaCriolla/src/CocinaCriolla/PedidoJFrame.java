@@ -338,12 +338,52 @@ public class PedidoJFrame extends javax.swing.JFrame {
 
     
     private void btnIrADetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIrADetalleActionPerformed
-        // Guarda los datos del JTable original en el arreglo
+        if (pedidosList.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "No hay pedidos para procesar.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Supongamos que estos valores son fijos por ahora.
+    int mesaId = 1; 
+    int clienteId = 1; 
+    int metodoPagoId = 1; 
+    int empleadoId = 1; 
+
+    // Mensajes de depuración
+    System.out.println("MesaId: " + mesaId);
+    System.out.println("ClienteId: " + clienteId);
+    System.out.println("MetodoPagoId: " + metodoPagoId);
+    System.out.println("EmpleadoId: " + empleadoId);
+
+    // Insertar Pedido
+    int pedidoId = ConexionSQL.insertarPedido(mesaId, clienteId, metodoPagoId, empleadoId);
+    if (pedidoId > 0) {
+        System.out.println("Pedido insertado con ID: " + pedidoId);
+
+        for (Pedido pedido : pedidosList) {
+            int productoId = ConexionSQL.obtenerIdProductoPorNombre(pedido.getNombre());
+            if (productoId > 0) {
+                System.out.println("ProductoId: " + productoId + " para el producto: " + pedido.getNombre());
+                boolean detalleInsertado = ConexionSQL.insertarDetallePedido(pedidoId, productoId, pedido.getCantidad());
+                if (!detalleInsertado) {
+                    JOptionPane.showMessageDialog(this, "Error al guardar el detalle del pedido en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    System.out.println("Detalle insertado: PedidoId = " + pedidoId + ", ProductoId = " + productoId + ", Cantidad = " + pedido.getCantidad());
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Producto no encontrado en la base de datos: " + pedido.getNombre(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        // Redirigir al siguiente formulario
         ComprobanteCliente detalleJF = new ComprobanteCliente();
         detalleJF.setUsuario(usuario);
         detalleJF.setPedidos(pedidosList);
         detalleJF.setVisible(true);
         this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(this, "Error al guardar el pedido en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnIrADetalleActionPerformed
 
     private Pedido createOnePedido(String number) {
@@ -395,15 +435,39 @@ public class PedidoJFrame extends javax.swing.JFrame {
     }
     
     private void btnAgregarATablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarATablaActionPerformed
-        // TODO add your handling code here:
         if (precioSeleccionado != 0.0) {
-            Pedido pedido = new Pedido();
-            pedido.setNombre(cbCombo.getSelectedItem().toString());
-            pedido.setCantidad(Integer.parseInt("1"));
-            pedido.setPrecioUnitario(precioSeleccionado);
-            agregarPedidoListaYValidar(pedido);
-            cbCombo.setSelectedIndex(0);
+        Pedido pedido = new Pedido();
+        pedido.setNombre(cbCombo.getSelectedItem().toString());
+        pedido.setCantidad(1); // Fijar cantidad en 1 como predeterminado
+        pedido.setPrecioUnitario(precioSeleccionado);
+
+        // Agregar a la lista y tabla local
+        agregarPedidoListaYValidar(pedido);
+
+        // Obtener IDs ficticios para los valores que no están claros
+        int mesaId = 1; // Puedes reemplazar con lógica dinámica
+        int clienteId = 1;
+        int metodoPagoId = 1;
+        int empleadoId = 1;
+
+        // Insertar en base de datos
+        int pedidoId = ConexionSQL.insertarPedido(mesaId, clienteId, metodoPagoId, empleadoId);
+        if (pedidoId > 0) {
+            int productoId = ConexionSQL.obtenerIdProductoPorNombre(pedido.getNombre());
+            if (productoId > 0) {
+                boolean detalleInsertado = ConexionSQL.insertarDetallePedido(pedidoId, productoId, pedido.getCantidad());
+                if (!detalleInsertado) {
+                    JOptionPane.showMessageDialog(this, "Error al guardar el detalle del pedido en la base de datos.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Error: Producto no encontrado en la base de datos.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al guardar el pedido en la base de datos.");
         }
+
+        cbCombo.setSelectedIndex(0);
+    }
     }//GEN-LAST:event_btnAgregarATablaActionPerformed
 
     private void cbComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbComboActionPerformed
